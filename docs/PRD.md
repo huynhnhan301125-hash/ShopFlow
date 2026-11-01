@@ -1,6 +1,4 @@
-# PRD
-
-# ShopFlow
+# ShopFlow - Product Requirements Document (PRD)
 
 # 1. Tổng quan và Bài toán kinh doanh
 
@@ -47,25 +45,54 @@
 
 #### User Story: Là một khách hàng, tôi muốn đăng nhập bằng tài khoản và mật khẩu để có thể mua hàng, truy cập giỏ hàng, xem lịch sử giao hàng.
 
-#### Kịch bản nghiệm thu 2.1: Người dùng để trống thông tin (Lỗi tại máy - Client Validation)
+#### Kịch bản nghiệm thu 1: Người dùng để trống thông tin (Lỗi tại máy - Client Validation)
 
 - Given: Người dùng ở màn hình đăng nhập.
 - When: Để trống ô Tài khoản hoặc Mật khẩu và bấm nút “Đăng nhập”
 - Then: Hệ thống hiển thị dòng chữ cảnh báo màu đỏ ngay dưới ô bị thiếu: “Vui lòng không để trống thông tin này”, và không gửi yêu cầu lên máy chủ.
 
-#### Kịch bản nghiệm thu 2.2: Nhập sai thông tin đăng nhập (Lỗi từ máy chủ - Server Error)
+#### Kịch bản nghiệm thu 2: Nhập sai thông tin đăng nhập (Lỗi từ máy chủ - Server Error)
 
 - Given: Người dùng ở màn hình đăng nhập và điền đầy đủ hai ô nhưng thông tin không chính xác.
 - When: Bấm nút “Đăng nhập”
 - Then:
     - Hệ thống gửi yêu cầu lên máy chủ, sau đó hiển thị thông báo lỗi nổi: *“*Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại!”.
-    - Trong lúc chờ xác nhận từ máy chủ nút “Đăng nhập” sẽ bị vô hiệu hóa và hiện thị biểu tượng Loading (xoay tròn).
+    - Trong lúc chờ xác nhận từ máy chủ nút “Đăng nhập” sẽ bị vô hiệu hóa và hiển thị biểu tượng Loading (xoay tròn).
 
-#### **Kịch bản nghiệm thu 2.3: Mất kết nối Internet (Lỗi mạng - Network Error)**
+#### **Kịch bản nghiệm thu 3: Mất kết nối Internet (Lỗi mạng - Network Error)**
 
 - Given: Điện thoại bị mất mạng (mất Wifi / 4G).
 - When: Người dùng bấm nút “Đăng nhập”.
 - Then: Hệ thống hiển thị thông báo: *“Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại đường truyền mạng”*.
+
+#### Kịch bản nghiệm thu 4: Người dùng chưa có tài khoản
+
+- Given: Người dùng ở màn hình đăng nhập và chưa có tài khoản.
+- When: Người dùng ấn “Đăng ký”.
+- Then :
+    - Hệ thống chuyển trang sang màn hình “Đăng ký”.
+
+### 3.1.3. Story 3: Đăng ký tài khoản (Register)
+
+#### User Story: Là một khách hàng, tôi muốn tạo tài khoản mua sắm cho mình.
+
+#### Kịch bản nghiệm thu:
+
+- Given: Người dùng ở trang đăng ký tài khoản.
+- When: Người dùng nhập đúng các trường thông tin để tạo tài khoản (tên đăng nhập, mật khẩu và xác nhận mật khẩu) sau đó ấn đăng ký.
+- Then: Hệ thống tiến hành kiểm tra và xác thực thông tin
+    - Nếu thành công chuyển hướng người dùng về lại trang đăng nhập.
+    - Nếu không thành công báo lỗi và yêu cầu người dùng đăng ký lại.
+
+### 3.1.4. Story 4: Đăng xuất tài khoản (Logout)
+
+#### User Story: Là một khách hàng, tôi muốn đăng xuất khỏi tài khoản hiện tại.
+
+#### Kịch bản nghiệm thu:
+
+- Given: Người dùng ở trang cài đặt của ứng dụng.
+- When: Người dùng ấn “Đăng xuất”.
+- Then: Hệ thống xóa Token trong máy và đưa người dùng về trang đăng nhập.
 
 ## 3.2 Module Khám phá hàng hóa và Tìm kiếm
 
@@ -120,29 +147,29 @@
 
 #### User Story: Là một khách hàng, tôi muốn mua hàng trong giỏ hàng hoặc mua ngay.
 
-#### Kịch bản nghiệm thu 1: Mặt hàng còn đủ
+#### Kịch bản nghiệm thu 1: Mặt hàng còn
 
 - Given: Khách hàng ở trang thông tin chi tiết sản phẩm hoặc trang giỏ hàng và quyết định mua mặt hàng mình cần.
 - When:
     - Người dùng ấn nút “Mua hàng”, Điền đầy đủ các trường thông tin cần thiết như ( số điện thoại, địa chỉ, tên, email…), chọn phương thức thanh toán. Sau khi điền và chọn xong người nhận ấn “Đặt hàng”.
 - Then:
     - Hệ thống tải dữ liệu mặt hàng, vô hiệu hóa nút “Mua hàng”.
-    - Hệ thống tại đơn hàng với trạng thái “Chờ thanh toán” và bắt đầu đếm ngược 10 phút.
+    - Hệ thống tạo đơn hàng với trạng thái “Chờ thanh toán” và bắt đầu đếm ngược 10 phút.
     - Nếu hết 10 phút chưa thanh toán thành công:
         - Hệ thống sẽ tự động chuyển đổi trạng thái đơn hàng thành “Đã hủy”. Đồng thời hoàn lại tồn kho (+1) và mở lại nút thêm giỏ hàng và mua ngay cho người khác.
     - Nếu thanh toán thành công:
         - Chuyển trang hiện dòng chữ “Bạn đã đặt hàng thành công” kèm 2 nút bấm “Quay về trang chủ” để quay về trang chủ của ứng dụng và nút bấm “Xem đơn hàng” chuyển hướng đến trang hiển thị thông tin của người dùng và thông tin cơ bản sản phẩm đã đặt.
+        - Hệ thống xóa các sản phẩm vừa mua khỏi giỏ hàng (nếu có).
         - Hiển thị ngày giao dự kiến, tiến độ hiện tại của mặt hàng, và 1 nút “Hủy đơn hàng”.
         - Hệ thống cập nhật tồn kho (-1) cho sản phẩm đó ( Nếu về 0, hiển thị hết hàng với các người dùng khác, vô hiệu hóa nút “Thêm vào giỏ hàng” và nút “Mua ngay”).
 
-#### Kịch bản nghiệm thu 2: Mặt hàng không đủ,
+#### Kịch bản nghiệm thu 2: Mặt hàng không còn
 
-- Given:  Khách hàng ở trang thông tin chi tiết sản phẩm hoặc trang giỏ hàng và quyết định mua mặt hàng mình cần, số lượng mặt hàng vẫn sắp hết.
-- When: Người dùng ấn nút “Mua hàng”, Điền đầy đủ các trường thông tin cần thiết như ( số điện thoại, địa chỉ, tên, email…) để xác nhận đơn hàng. Sau khi điền xong người nhận ấn “Đặt hàng”
+- Given: Khách hàng ở trang thông tin chi tiết sản phẩm hoặc trang giỏ hàng và quyết định mua mặt hàng mình cần, số lượng mặt hàng đã hết.
+- When: Người dùng ấn nút “Mua hàng”,  “Đặt hàng”.
 - Then:
-    - Hệ thống tải dữ liệu mặt hàng, vô hiệu hóa nút “Mua hàng”.
-    - Hệ thống tại đơn hàng với trạng thái “Chờ thanh toán”
-    - Hệ thống tạm dừng tồn kho (-1) cho sản phẩm đó ( Nếu về 0, hiển thị hết hàng với các người dùng khác, vô hiệu hóa nút “Thêm vào giỏ hàng” và nút “Mua ngay”).
+    - Hệ thống hiển thị thông báo “Mặt hàng đã hết.”
+    - Hệ thống vô hiệu hóa nút “Mua hàng” và “Đặt hàng” không tạo đơn hàng.
 
 ### 3.3.3. Story 3: Hủy đơn hàng
 
@@ -160,9 +187,9 @@
 - Given: Người dùng ở trang chi tiết đơn hàng và trạng thái đơn hàng là “Chờ thanh toán” và “Chờ xác nhận”.
 - When: Khách hàng ấn “Hủy đơn”.
 - Then:
-    - Hệ thộng tiếp nhận yêu cầu hiển thị một danh mục lý do hủy đơn ( “Không còn nhu cầu”, “Có giá tốt hơn”, “Thay đổi địa chỉ/phương thức thanh toán”,… “Khác”), và nút “Xác nhận” để hủy đơn hoặc “Hủy” nếu không quay lại.
+    - Hệ thống tiếp nhận yêu cầu hiển thị một danh mục lý do hủy đơn ( “Không còn nhu cầu”, “Có giá tốt hơn”, “Thay đổi địa chỉ/phương thức thanh toán”,… “Khác”), và nút “Xác nhận” để hủy đơn hoặc “Hủy” nếu không quay lại.
         - Với các lý do về thông tin giao hàng, hay phương thức thanh toán thì hệ thống sẽ mở lại màn hình xác nhận đơn hàng để người dùng chỉnh sửa và ấn nút “Lưu”.
-    - Sau khi xác nhận hủy hệ thống sẽ trả lại chuyển đổi trạng thái đơn hàng thành “Đã hủy”. Cập nhật lại tồn kho (+1) cho sản phầm của shop đó.
+    - Sau khi xác nhận hủy hệ thống sẽ trả lại chuyển đổi trạng thái đơn hàng thành “Đã hủy”. Cập nhật lại tồn kho (+1) cho sản phẩm của shop đó.
 
 # 4. Yêu cầu phi chức năng (Non-Functional Requirements - NFR)
 

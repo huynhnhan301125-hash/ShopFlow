@@ -1,209 +1,230 @@
-# ShopFlow - Product Requirements Document (PRD)
+# ShopFlow — Product Requirements Document (PRD)
 
-# 1. Tổng quan và Bài toán kinh doanh
+**Loại tài liệu:** PRD đồ án học tập
+**Phiên bản:** 1.0
+**Mô hình:** Ứng dụng mua sắm B2C, một cửa hàng duy nhất
 
-## 1.1. Vấn đề thực tế (Problem Statement)
+## 1. Tổng quan
 
-- Thời gian: Khách hàng phải mất thời gian tìm cửa hàng, di chuyển đến cửa hàng, tìm kiếm sản phẩm,chờ thanh toán tại quầy. Mọi việc đều phải trực tiếp làm dẫn đến mất nhiều thời gian.
-- Không gian: Quá trình di chuyển phụ thuộc nhiều yếu tố như giao thông, thời tiết, tìm kiếm sản phẩm trong cửa hàng gây ra sự bất tiện khi mua hàng.
-- Sản phẩm: Sản phẩm sẽ có đôi lúc hết hàng, cửa hàng đóng cửa khiến khách hàng không thể đáp ứng được nhu cầu hoặc phải đổi cửa hàng.
-- Khác: Quên đem tiền hay điện thoại không thể thanh toán, không nhớ mặt hàng mình cần mua,…
+### 1.1. Bài toán
 
-## 1.2. Giải pháp và Giá trị cốt lõi (Value Proposition)
+Mua sắm trực tiếp có thể tốn thời gian tìm cửa hàng, di chuyển, tìm sản phẩm và chờ thanh toán. Trải nghiệm còn phụ thuộc vào giao thông, thời tiết, giờ mở cửa và tình trạng tồn kho. Khách hàng cũng có thể quên mang tiền hoặc chưa quyết định mua ngay một sản phẩm.
 
-### ShopFlow mang đến các giải pháp giúp khách hàng hay người dùng giải quyết được các vấn đề trên, tối ưu hóa mọi thao tác/hành động giúp đáp ứng nhu cầu mua hàng.
+### 1.2. Giải pháp và giá trị
 
-- Người dùng có thể mua sắm trực tuyến, lựa chọn, tìm kiếm, thanh toán cho mặt hàng trực tuyến giúp giải quyết vấn đề thời gian và thanh toán.
-- Người dùng có thể mua hàng mọi lúc, mọi nơi khi có kết nối internet giải quyết vấn đề không gian.
-- Người dùng có thể có cái nhìn trực quan về mặt hàng mình định mua thông qua đánh giá của nhiều người dùng, thêm sản phẩm vào giỏ hàng cho các sản phẩm chưa cần mua ngay lập tức/ mua sau.
-- Giao diện trực quan, thiết kế thân thiện với người dùng, tối ưu hóa trải nghiệm người dùng.
+ShopFlow cho phép khách hàng xem, tìm kiếm và chọn sản phẩm trực tuyến; quản lý giỏ hàng; đặt hàng và thanh toán theo các phương thức được hỗ trợ. Thông tin sản phẩm và đánh giá giúp khách hàng tham khảo trước khi mua. Giao diện hướng đến sự trực quan, dễ dùng và phù hợp với ứng dụng di động.
 
-# 2. Phạm vi sản phẩm (Product Scope)
+### 1.3. Giả định và giới hạn của đồ án
+
+- **Mô hình kinh doanh:** Một cửa hàng duy nhất (Single Merchant); không phải sàn thương mại điện tử và không có người bán bên thứ ba.
+- **Tiền tệ và vận chuyển:** Sử dụng Việt Nam đồng (VNĐ); miễn phí vận chuyển trong phạm vi đồ án.
+- **Ứng dụng cửa hàng:** Bản v1 tập trung vào ứng dụng khách hàng, không xây dựng giao diện quản trị. Các trạng thái vận hành của cửa hàng được mô phỏng.
+- **Nguồn dữ liệu:** Danh mục sản phẩm và dữ liệu đánh giá đọc từ DummyJSON. Đăng ký/đăng nhập, giỏ hàng, đơn hàng, ví giả lập và tồn kho được xử lý bằng dịch vụ hoặc dữ liệu mô phỏng của đồ án.
+- **Đánh giá:** Đánh giá và nhận xét có sẵn chỉ để xem. Viết đánh giá mới là tính năng Should Have, chưa thuộc bản v1.
+- **Thanh toán:** COD và Ví giả lập chỉ phục vụ mô phỏng; không xử lý giao dịch tiền thật.
+
+## 2. Phạm vi sản phẩm
 
 | Must Have | Should Have | Could Have | Won’t Have |
 | --- | --- | --- | --- |
-| Tài khoản người dùng: Đăng ký, Đăng nhập, Lưu phiên đăng nhập, Đăng xuất. | Bộ lọc theo danh mục ( giá, hãng, đánh giá của người dùng, bán chạy). | Chuyển đổi giao diện sáng/tối. | Thanh toán bằng thẻ quốc tế (Visa, Mastercard). |
-| Khám phá hàng hóa: Danh sách sản phẩm phân trang, tìm kiếm sản phẩm theo từ khóa, trang chi tiết sản phẩm. | Viết đánh giá cho sản phẩm. | Chuyển đổi ngôn ngữ. | Liên hệ với bên bán hàng, bên giao hàng, shipper. |
-| Giỏ hàng và đơn hàng: Thêm, sửa, xóa mặt hàng trong giỏ hàng, mua hàng ngay lập tức. | Vô hiệu hóa các nút bấm tránh người dùng spam. |  | Định vị GPS. |
-| Cung cấp đa dạng phương thức thanh toán: COD (Thanh toán khi mua hàng), Mô phỏng chuyển khoản ngân hàng (QR Code / Mock Wallet). |  |  | Xử lý trùng đơn phía backend. |
+| Tài khoản: đăng ký, đăng nhập, duy trì phiên và đăng xuất. | Bộ lọc theo danh mục, giá, hãng, đánh giá và mức độ bán chạy. | Chuyển đổi giao diện sáng/tối. | Thanh toán bằng thẻ quốc tế như Visa hoặc Mastercard. |
+| Khám phá sản phẩm: danh sách phân trang, tìm kiếm và trang chi tiết. | Người dùng viết đánh giá sản phẩm. | Chuyển đổi ngôn ngữ. | Liên hệ trực tiếp với người bán, đơn vị giao hàng hoặc shipper. |
+| Giỏ hàng: thêm, sửa số lượng, xóa và chuyển sang đặt hàng. |  |  | Định vị GPS. |
+| Đặt hàng và thanh toán bằng COD hoặc Ví giả lập. |  |  | Nhiều người bán hoặc mô hình sàn thương mại điện tử. |
+| Chống tạo đơn trùng bằng Idempotency Token và trạng thái xử lý trên giao diện. |  |  |  |
+| Xem lịch sử, chi tiết và trạng thái đơn hàng; hủy đơn theo điều kiện. |  |  |  |
 
-# 3. Phân rã tính năng và Tiêu chí nghiệm thu (Feature Specifications)
+## 3. Quy tắc nghiệp vụ
 
-## 3.1 Module Tài khoản và Xác thực
+### 3.1. Trạng thái đơn hàng và thanh toán
 
-### 3.1.1. Story 1: Đăng nhập thành công
+Trạng thái đơn hàng và trạng thái thanh toán là hai thông tin độc lập. Vì vậy, đơn COD có thể ở trạng thái **Chờ xác nhận** nhưng vẫn **Chưa thanh toán**.
 
-#### User Story: Là một khách hàng, tôi muốn đăng nhập bằng tài khoản và mật khẩu để có thể mua hàng, truy cập giỏ hàng, xem lịch sử giao hàng.
+**Trạng thái đơn hàng**
 
-#### Kịch bản nghiệm thu:
+| Trạng thái | Ý nghĩa |
+| --- | --- |
+| Chờ thanh toán | Đơn Ví giả lập đã tạo và đang chờ thanh toán trong thời hạn 10 phút. |
+| Chờ xác nhận | Đơn đã được tạo hoặc thanh toán thành công, đang chờ xử lý. COD vẫn chưa thanh toán ở trạng thái này. |
+| Chuẩn bị đơn hàng | Đơn đang được chuẩn bị để giao. |
+| Đang giao hàng | Đơn đã bàn giao cho đơn vị giao hàng mô phỏng. |
+| Hoàn thành | Khách đã nhận hàng; COD được ghi nhận thanh toán khi thu tiền thành công. |
+| Đã hủy | Đơn đã bị hủy bởi khách hoặc do hết thời hạn thanh toán. |
 
-- Given ( Điều kiện ban đầu): Người dùng đang ở màn hình đăng nhập, đã tạo tài khoản (có tài khoản và mật khẩu đầy đủ).
-- When ( Hành động): Người dùng nhập đúng tài khoản, mật khẩu và bấm “Đăng nhập”. Khi bấm nút đăng nhập, nút bấm chuyển sang trạng thái Loading (xoay tròn) và bị vô hiệu hóa(disable) tránh người dùng bấm liên tục.
-- Then ( Hệ thống phải làm gì): Thông báo đăng nhập thành công, lưu AccessToken và RefreshToken an toàn vào Secure Storage (Android Keystore/ iOS Keychain), chuyển hướng đến màn hình “Trang chủ”.
+**Trạng thái thanh toán:** Chưa thanh toán (Unpaid), Đã thanh toán (Paid), Đã hoàn tiền (Refunded).
 
-### 3.1.2. Story 2 : Đăng nhập thất bại
+| Phương thức và sự kiện | Trạng thái đơn hàng | Trạng thái thanh toán | Xử lý tồn kho |
+| --- | --- | --- | --- |
+| COD — tạo đơn thành công | Chờ xác nhận | Chưa thanh toán | Giữ số lượng đã đặt. |
+| COD — bàn giao vận chuyển | Đang giao hàng | Chưa thanh toán | Chốt số lượng đã giữ; giảm tồn kho thực tế một lần. |
+| COD — giao hàng và thu tiền thành công | Hoàn thành | Đã thanh toán | Không trừ tồn kho lần nữa. |
+| COD — hủy trước khi bàn giao | Đã hủy | Chưa thanh toán | Giải phóng số lượng đã giữ. |
+| Ví giả lập — tạo đơn thành công | Chờ thanh toán | Chưa thanh toán | Giữ số lượng đã đặt tối đa 10 phút. |
+| Ví giả lập — thanh toán thành công | Chờ xác nhận | Đã thanh toán | Tiếp tục giữ số lượng đến khi bàn giao vận chuyển. |
+| Ví giả lập — hết hạn hoặc hủy trước khi trả tiền | Đã hủy | Chưa thanh toán | Giải phóng số lượng đã giữ. |
+| Ví giả lập — hủy sau khi trả tiền, trước khi chuẩn bị đơn | Đã hủy | Đã hoàn tiền | Hoàn tiền vào ví và giải phóng số lượng đã giữ. |
 
-#### User Story: Là một khách hàng, tôi muốn đăng nhập bằng tài khoản và mật khẩu để có thể mua hàng, truy cập giỏ hàng, xem lịch sử giao hàng.
+### 3.2. Quy tắc tồn kho
 
-#### Kịch bản nghiệm thu 1: Người dùng để trống thông tin (Lỗi tại máy - Client Validation)
+- **Tồn kho thực tế (Physical Stock):** Số lượng hàng hiện có trong kho.
+- **Số lượng tạm giữ (Reserved Stock):** Số lượng đã dành cho các đơn chưa bàn giao vận chuyển.
+- **Số lượng khả dụng (Available Stock):** `Available Stock = Physical Stock - Reserved Stock`.
+- Khi tạo đơn, hệ thống kiểm tra số lượng khả dụng và giữ số lượng mua cho cả COD và Ví giả lập. Không tạo đơn nếu số lượng yêu cầu vượt quá lượng khả dụng.
+- Khi bàn giao đơn cho vận chuyển, hệ thống giảm tồn kho thực tế và số lượng tạm giữ đúng một lần.
+- Khi đơn bị hủy trước khi bàn giao, hệ thống chỉ giải phóng số lượng tạm giữ; không cộng thêm vào tồn kho thực tế.
+- Các thao tác giữ, chốt hoặc giải phóng tồn kho phải được xử lý nhất quán để tránh bán vượt tồn hoặc cập nhật kho hai lần.
 
-- Given: Người dùng ở màn hình đăng nhập.
-- When: Để trống ô Tài khoản hoặc Mật khẩu và bấm nút “Đăng nhập”
-- Then: Hệ thống hiển thị dòng chữ cảnh báo màu đỏ ngay dưới ô bị thiếu: “Vui lòng không để trống thông tin này”, và không gửi yêu cầu lên máy chủ.
+## 4. Yêu cầu chức năng và tiêu chí nghiệm thu
 
-#### Kịch bản nghiệm thu 2: Nhập sai thông tin đăng nhập (Lỗi từ máy chủ - Server Error)
+### 4.1. Tài khoản và xác thực
 
-- Given: Người dùng ở màn hình đăng nhập và điền đầy đủ hai ô nhưng thông tin không chính xác.
-- When: Bấm nút “Đăng nhập”
-- Then:
-    - Hệ thống gửi yêu cầu lên máy chủ, sau đó hiển thị thông báo lỗi nổi: *“*Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại!”.
-    - Trong lúc chờ xác nhận từ máy chủ nút “Đăng nhập” sẽ bị vô hiệu hóa và hiển thị biểu tượng Loading (xoay tròn).
+#### 4.1.1. Đăng nhập thành công
 
-#### **Kịch bản nghiệm thu 3: Mất kết nối Internet (Lỗi mạng - Network Error)**
+**User story:** Là khách hàng, tôi muốn đăng nhập bằng tài khoản và mật khẩu để mua hàng, truy cập giỏ hàng và xem lịch sử đơn.
 
-- Given: Điện thoại bị mất mạng (mất Wifi / 4G).
-- When: Người dùng bấm nút “Đăng nhập”.
-- Then: Hệ thống hiển thị thông báo: *“Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại đường truyền mạng”*.
+- **Given:** Người dùng đã có tài khoản và đang ở màn hình đăng nhập.
+- **When:** Người dùng nhập đúng tài khoản, mật khẩu và chọn **Đăng nhập**.
+- **Then:** Nút chuyển sang trạng thái đang tải và bị vô hiệu hóa trong lúc gửi yêu cầu. Khi đăng nhập thành công, phiên được lưu an toàn và người dùng được chuyển đến trang chủ.
 
-#### Kịch bản nghiệm thu 4: Người dùng chưa có tài khoản
+#### 4.1.2. Đăng nhập thất bại
 
-- Given: Người dùng ở màn hình đăng nhập và chưa có tài khoản.
-- When: Người dùng ấn “Đăng ký”.
-- Then :
-    - Hệ thống chuyển trang sang màn hình “Đăng ký”.
+- **Thiếu thông tin:** Nếu tài khoản hoặc mật khẩu để trống, hiển thị cảnh báo tại trường tương ứng và không gửi yêu cầu lên máy chủ.
+- **Sai thông tin:** Hiển thị thông báo “Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại!”. Nút đăng nhập hiển thị trạng thái đang tải và bị vô hiệu hóa trong lúc chờ phản hồi.
+- **Mất kết nối:** Hiển thị “Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại đường truyền mạng”.
+- **Chưa có tài khoản:** Chọn **Đăng ký** sẽ mở màn hình đăng ký.
 
-### 3.1.3. Story 3: Đăng ký tài khoản (Register)
+#### 4.1.3. Đăng ký
 
-#### User Story: Là một khách hàng, tôi muốn tạo tài khoản mua sắm cho mình.
+**User story:** Là khách hàng, tôi muốn tạo tài khoản để sử dụng ứng dụng mua sắm.
 
-#### Kịch bản nghiệm thu:
+- **Given:** Người dùng đang ở màn hình đăng ký.
+- **When:** Người dùng điền tên đăng nhập, mật khẩu và xác nhận mật khẩu hợp lệ rồi chọn **Đăng ký**.
+- **Then:** Hệ thống kiểm tra dữ liệu; mật khẩu được băm một chiều trước khi lưu. Nếu thành công, người dùng được chuyển về màn hình đăng nhập. Nếu thất bại, hiển thị lỗi phù hợp để người dùng sửa thông tin.
 
-- Given: Người dùng ở trang đăng ký tài khoản.
-- When: Người dùng nhập đúng các trường thông tin để tạo tài khoản (tên đăng nhập, mật khẩu và xác nhận mật khẩu) sau đó ấn đăng ký.
-- Then: Hệ thống tiến hành kiểm tra và xác thực thông tin
-    - Nếu thành công chuyển hướng người dùng về lại trang đăng nhập.
-    - Nếu không thành công báo lỗi và yêu cầu người dùng đăng ký lại.
+#### 4.1.4. Đăng xuất
 
-### 3.1.4. Story 4: Đăng xuất tài khoản (Logout)
+**User story:** Là người dùng, tôi muốn đăng xuất khỏi tài khoản hiện tại.
 
-#### User Story: Là một khách hàng, tôi muốn đăng xuất khỏi tài khoản hiện tại.
+- **Given:** Người dùng đang ở phần cài đặt.
+- **When:** Người dùng chọn **Đăng xuất**.
+- **Then:** Ứng dụng xóa token và dữ liệu phiên trên thiết bị, sau đó chuyển về màn hình đăng nhập.
 
-#### Kịch bản nghiệm thu:
+### 4.2. Khám phá và tìm kiếm sản phẩm
 
-- Given: Người dùng ở trang cài đặt của ứng dụng.
-- When: Người dùng ấn “Đăng xuất”.
-- Then: Hệ thống xóa Token trong máy và đưa người dùng về trang đăng nhập.
+#### 4.2.1. Danh sách sản phẩm và phân trang
 
-## 3.2 Module Khám phá hàng hóa và Tìm kiếm
+**User story:** Là khách hàng, tôi muốn xem sản phẩm dạng lưới và tải thêm sản phẩm khi cuộn để duyệt danh sách mượt mà.
 
-### **3.2.1. Story 1: Xem danh sách sản phẩm & Cuộn trang (Pagination)**
+- **Given:** Người dùng mở trang chủ hoặc cuộn gần cuối danh sách.
+- **When:** Ứng dụng tải trang dữ liệu đầu tiên hoặc trang tiếp theo.
+- **Then:** Hiển thị trạng thái đang tải phù hợp. Khi tải xong, mỗi sản phẩm có ảnh, tên, giá, số sao và số lượt mua.
 
-#### **User Story:** Là một khách hàng, tôi muốn xem danh sách sản phẩm theo dạng lưới (Grid) và tự động tải thêm khi cuộn xuống dưới, để có thể xem nhiều sản phẩm mà không bị đơ giật ứng dụng.
+#### 4.2.2. Tìm kiếm theo từ khóa
 
-### Kịch bản nghiệm thu:
+**User story:** Là khách hàng, tôi muốn tìm sản phẩm bằng tên hoặc từ khóa.
 
-- Given: Người dùng mở ứng dụng tại màn hình “Trang chủ”.
-- When: Hệ thống đang tải dữ liệu (lần đầu) hoặc người dùng cuộn danh sách xuống gần cuối trang.
-- Then: Hiển thị trạng thái Loading (xoay tròn) khi hệ thống tải dữ liệu và khi người dùng cuộn danh sách xuống mà dữ liệu chưa tải lên xong. Khi tải xong, hiển thị danh sách sản phẩm gồm: Hình ảnh, tên, giá bán, số sao, số lượt mua.
+- **Given:** Người dùng đang ở thanh tìm kiếm.
+- **When:** Người dùng nhập từ khóa; ứng dụng hiển thị gợi ý phù hợp. Người dùng chọn gợi ý hoặc gửi từ khóa để xem kết quả.
+- **Then:** Hiển thị danh sách sản phẩm phù hợp. Nếu không có kết quả, hiển thị “Sản phẩm bạn tìm kiếm không tồn tại”.
 
-### **3.2.2. Story 2: Tìm kiếm sản phẩm theo từ khóa**
+#### 4.2.3. Chi tiết sản phẩm
 
-#### **User Story:** Là một khách hàng, tôi muốn gõ tên sản phẩm vào thanh tìm kiếm để tìm nhanh món hàng mình cần.
+**User story:** Là khách hàng, tôi muốn xem thông tin chi tiết trước khi quyết định mua.
 
-#### Kịch bản nghiệm thu:
+- **Given:** Người dùng đang xem danh sách sản phẩm.
+- **When:** Người dùng chọn một sản phẩm.
+- **Then:** Hiển thị tên, ảnh, giá, số lượt mua, điểm đánh giá, mô tả và đánh giá có sẵn; cung cấp nút **Thêm vào giỏ hàng** và **Mua ngay**.
 
-- Given: Người dùng ở thanh tìm kiếm.
-- When: Người dùng gõ từ khóa (ví dụ: “phone”) hệ thống đọc ký tự và gợi ý cho người dùng các sản phẩm theo từ khóa, sau đó người dùng ấn chọn gợi ý hoặc ấn enter khi gõ xong để đi đến trang danh mục sản phẩm mình muốn.
-- Then:
-    - Nếu có sản phẩm: Danh sách hiển thị các món phù hợp.
-    - Trường hợp Edge Case (Không có hàng): Nếu gõ từ khóa không tồn tại (ví dụ: “xyz123”) thì màn hình hiển thị nội dung “Sản phẩm bạn tìm kiếm không tồn tại” .
+### 4.3. Giỏ hàng và đặt hàng
 
-### 3.2.3. Story 3: Xem chi tiết sản phẩm
+#### 4.3.1. Thao tác với giỏ hàng
 
-#### User Story: Là một khách hàng, tôi muốn xem thông tin chi tiết của sản phẩm mình muốn mua.
+**User story:** Là khách hàng, tôi muốn thêm, sửa số lượng và xóa sản phẩm trong giỏ hàng.
 
-#### Kịch bản nghiệm thu:
+- Khi tăng hoặc giảm số lượng, ứng dụng kiểm tra tồn kho khả dụng và cập nhật số lượng cùng tổng tiền nếu hợp lệ.
+- Nếu sản phẩm không còn đủ hàng, hiển thị “Sản phẩm đã được bán hết” và không cập nhật số lượng vượt tồn.
+- Nếu giỏ hàng trống, hiển thị thông báo “Giỏ hàng của bạn đang trống” cùng nút **Mua sắm ngay** để về trang chủ.
+- Chọn mua hàng trong giỏ sẽ mở màn hình xác nhận đơn hàng.
 
-- Given: Người dùng ở trang danh mục sản phẩm và lựa chọn được sản phẩm mình muốn xem thông tin.
-- When: Click vào sản phẩm cần mua.
-- Then: Màn hình hiển thị các thông tin như tên mặt hàng, giá cả, số lượt mua, số sao, thông tin của sản phẩm, đánh giá sản phẩm. Hai nút bấm “Thêm vào giỏ hàng” với icon giỏ hàng và nút bấm “Mua ngay”.
+#### 4.3.2. Xác nhận và tạo đơn
 
-## 3.3 Module giỏ hàng và Đặt hàng (Cart & Checkout)
+**User story:** Là khách hàng, tôi muốn đặt hàng từ giỏ hàng hoặc mua ngay.
 
-### 3.3.1. Story 1: Thao tác với giỏ hàng
+- **Given:** Khách hàng chọn mua từ giỏ hàng hoặc màn hình chi tiết sản phẩm.
+- **When:** Người dùng xác nhận họ tên, số điện thoại, địa chỉ giao hàng; chọn COD hoặc Ví giả lập; rồi chọn **Đặt hàng**.
+- **Then:**
+    - Kiểm tra dữ liệu giao hàng và tồn kho khả dụng trước khi tạo đơn.
+    - Khóa nút gửi trong lúc xử lý. Tạo một Idempotency Token duy nhất cho lần đặt hàng; nếu yêu cầu được gửi lại do lỗi mạng, hệ thống trả về kết quả của lần gửi trước thay vì tạo đơn trùng.
+    - Lưu ảnh, tên, giá và số lượng sản phẩm tại thời điểm đặt vào chi tiết đơn (`order_items`) để lịch sử đơn không đổi nếu thông tin sản phẩm thay đổi.
+    - Giữ số lượng hàng tương ứng theo quy tắc tồn kho ở mục 3.2.
 
-#### User Story: Là một khách hàng, tôi muốn thêm, sửa, xóa sản phẩm trong giỏ hàng của mình.
+**COD**
 
-#### Kịch bản nghiệm thu:
+- Tạo đơn với trạng thái **Chờ xác nhận** và thanh toán **Chưa thanh toán**.
+- Sau khi tạo đơn thành công, xóa các sản phẩm đã đặt khỏi giỏ hàng và hiển thị màn hình đặt hàng thành công.
+- Khi đơn được giao và thu tiền thành công, cập nhật đơn **Hoàn thành** và thanh toán **Đã thanh toán**.
 
-- Given: Người dùng ở trang giỏ hàng thực hiện các thao tác chỉnh sửa trong giỏ hàng với các sản phẩm đã được thêm vào giỏ hàng.
-- When: Người dùng chỉnh sửa các sản phẩm trong giỏ hàng (tăng/giảm số lượng, xóa mặt hàng), ấn mua các sản phẩm trong giỏ hàng.
-- Then:
-    - Với các thao tác tăng/giảm hay xóa mặt hàng hệ thống sẽ kiểm tra số lượng của sản phẩm tại cửa hàng bán chúng, nếu còn thì cập nhật lại số lượng, tổng tiền, không còn thì hiện thông báo “Sản phẩm đã được bán hết” giữ nguyên các trường thông tin.
-    - Với thao tác mua hàng trong giỏ hàng thì hệ thống sẽ chuyển người dùng sang trang mua hàng.
-    - Nếu giỏ hàng trống hiển thị dòng chữ “Giỏ hàng của bạn đang trống” kèm biểu tượng giỏ hàng trống và nút bấm “Mua sắm ngay” để chuyển đến trang chủ.
+**Ví giả lập**
 
-### 3.3.2. Story 2: Xác nhận đặt hàng
+- Tạo đơn với trạng thái **Chờ thanh toán**, thanh toán **Chưa thanh toán** và bắt đầu thời hạn giữ hàng 10 phút.
+- Nếu thanh toán thành công trong thời hạn, cập nhật thanh toán **Đã thanh toán**, đơn **Chờ xác nhận**, rồi xóa sản phẩm đã đặt khỏi giỏ hàng.
+- Nếu người dùng hủy hoặc hết 10 phút mà chưa thanh toán, cập nhật đơn **Đã hủy**, giải phóng số lượng tạm giữ và không ghi nhận thanh toán.
+- Nếu thanh toán thành công nhưng đơn bị hủy trước khi chuẩn bị, hoàn đúng số tiền về Ví giả lập và cập nhật thanh toán **Đã hoàn tiền**.
+- Mỗi tài khoản thử nghiệm có số dư giả lập ban đầu 5.000.000 VNĐ. Nếu số dư không đủ, hiển thị “Số dư ví không đủ để thanh toán”; đơn vẫn ở trạng thái **Chờ thanh toán** trong thời hạn còn lại. Bản v1 không bao gồm chức năng nạp tiền.
+- Nếu mất mạng khi thanh toán, hiển thị lỗi kết nối. Người dùng có thể kiểm tra trạng thái đơn và thử thanh toán lại trong thời hạn; không ghi nhận thanh toán hai lần.
 
-#### User Story: Là một khách hàng, tôi muốn mua hàng trong giỏ hàng hoặc mua ngay.
+#### 4.3.3. Mặt hàng hết
 
-#### Kịch bản nghiệm thu 1: Mặt hàng còn
+- **Given:** Sản phẩm trong giỏ hoặc trên trang chi tiết không còn đủ số lượng khả dụng.
+- **When:** Người dùng chọn **Mua ngay** hoặc **Đặt hàng**.
+- **Then:** Hiển thị “Mặt hàng đã hết”, vô hiệu hóa thao tác đặt mua và không tạo đơn.
 
-- Given: Khách hàng ở trang thông tin chi tiết sản phẩm hoặc trang giỏ hàng và quyết định mua mặt hàng mình cần.
-- When:
-    - Người dùng ấn nút “Mua hàng”, Điền đầy đủ các trường thông tin cần thiết như ( số điện thoại, địa chỉ, tên, email…), chọn phương thức thanh toán. Sau khi điền và chọn xong người nhận ấn “Đặt hàng”.
-- Then:
-    - Hệ thống tải dữ liệu mặt hàng, vô hiệu hóa nút “Mua hàng”.
-    - Hệ thống tạo đơn hàng với trạng thái “Chờ thanh toán” và bắt đầu đếm ngược 10 phút.
-    - Nếu hết 10 phút chưa thanh toán thành công:
-        - Hệ thống sẽ tự động chuyển đổi trạng thái đơn hàng thành “Đã hủy”. Đồng thời hoàn lại tồn kho (+1) và mở lại nút thêm giỏ hàng và mua ngay cho người khác.
-    - Nếu thanh toán thành công:
-        - Chuyển trang hiện dòng chữ “Bạn đã đặt hàng thành công” kèm 2 nút bấm “Quay về trang chủ” để quay về trang chủ của ứng dụng và nút bấm “Xem đơn hàng” chuyển hướng đến trang hiển thị thông tin của người dùng và thông tin cơ bản sản phẩm đã đặt.
-        - Hệ thống xóa các sản phẩm vừa mua khỏi giỏ hàng (nếu có).
-        - Hiển thị ngày giao dự kiến, tiến độ hiện tại của mặt hàng, và 1 nút “Hủy đơn hàng”.
-        - Hệ thống cập nhật tồn kho (-1) cho sản phẩm đó ( Nếu về 0, hiển thị hết hàng với các người dùng khác, vô hiệu hóa nút “Thêm vào giỏ hàng” và nút “Mua ngay”).
+### 4.4. Hủy đơn hàng
 
-#### Kịch bản nghiệm thu 2: Mặt hàng không còn
+**User story:** Là khách hàng, tôi muốn hủy đơn khi không còn nhu cầu mua.
 
-- Given: Khách hàng ở trang thông tin chi tiết sản phẩm hoặc trang giỏ hàng và quyết định mua mặt hàng mình cần, số lượng mặt hàng đã hết.
-- When: Người dùng ấn nút “Mua hàng”,  “Đặt hàng”.
-- Then:
-    - Hệ thống hiển thị thông báo “Mặt hàng đã hết.”
-    - Hệ thống vô hiệu hóa nút “Mua hàng” và “Đặt hàng” không tạo đơn hàng.
+- Nút **Hủy đơn** chỉ hiển thị khi đơn ở trạng thái **Chờ thanh toán** hoặc **Chờ xác nhận**. Không cho khách tự hủy sau khi đơn chuyển sang **Chuẩn bị đơn hàng** hoặc **Đang giao hàng**.
+- Khi chọn hủy, hiển thị lý do như “Không còn nhu cầu”, “Có giá tốt hơn”, “Thay đổi thông tin giao hàng” hoặc “Khác”, cùng lựa chọn xác nhận hay quay lại.
+- Đơn COD chưa thanh toán khi bị hủy sẽ giữ trạng thái thanh toán **Chưa thanh toán** và giải phóng lượng hàng đã giữ.
+- Đơn Ví giả lập đã thanh toán khi bị hủy trước khi chuẩn bị sẽ được hoàn tiền, chuyển sang **Đã hoàn tiền** và giải phóng lượng hàng đã giữ.
+- Đơn Ví giả lập chưa thanh toán bị hủy hoặc hết hạn sẽ không phát sinh hoàn tiền.
 
-### 3.3.3. Story 3: Hủy đơn hàng
+### 4.5. Lịch sử và chi tiết đơn hàng
 
-#### User Story: Là một khách hàng, tôi không có nhu cầu với sản phẩm đã đặt nữa và muốn hủy đơn hàng.
+**User story:** Là khách hàng đã đăng nhập, tôi muốn xem lại đơn hàng, trạng thái giao hàng và chi tiết sản phẩm đã đặt.
 
-#### Kịch bản nghiệm thu:
+- Danh sách đơn có các nhóm: **Tất cả**, **Chờ thanh toán**, **Đang xử lý** (Chờ xác nhận/Chuẩn bị), **Đang giao**, **Hoàn thành** và **Đã hủy**.
+- Chi tiết đơn hiển thị mã đơn, ngày đặt, sản phẩm, ảnh, số lượng, giá tại thời điểm đặt, phí vận chuyển, tổng tiền, phương thức và trạng thái thanh toán.
+- Với đơn **Chờ thanh toán**, hiển thị thời gian còn lại và nút **Thanh toán ngay**.
+- Với đơn **Chờ thanh toán** hoặc **Chờ xác nhận**, hiển thị **Hủy đơn** theo quy tắc tại mục 4.4.
 
-- Trạng thái đơn hàng:
-    - Chờ thanh toán: Vừa bấm đặt hàng, chờ thanh toán.
-    - Chờ xác nhận: Khách đã trả tiền, shop nhận thông báo xác nhận.
-    - Chuẩn bị đơn hàng: Shop đóng gói đơn hàng.
-    - Đang giao hàng: Giao hàng cho bên vận chuyển.
-    - Hoàn thành: Khách nhận được hàng.
-    - Đã hủy: Đơn bị hủy (Khách hủy, shop hủy).
-- Given: Người dùng ở trang chi tiết đơn hàng và trạng thái đơn hàng là “Chờ thanh toán” và “Chờ xác nhận”.
-- When: Khách hàng ấn “Hủy đơn”.
-- Then:
-    - Hệ thống tiếp nhận yêu cầu hiển thị một danh mục lý do hủy đơn ( “Không còn nhu cầu”, “Có giá tốt hơn”, “Thay đổi địa chỉ/phương thức thanh toán”,… “Khác”), và nút “Xác nhận” để hủy đơn hoặc “Hủy” nếu không quay lại.
-        - Với các lý do về thông tin giao hàng, hay phương thức thanh toán thì hệ thống sẽ mở lại màn hình xác nhận đơn hàng để người dùng chỉnh sửa và ấn nút “Lưu”.
-    - Sau khi xác nhận hủy hệ thống sẽ trả lại chuyển đổi trạng thái đơn hàng thành “Đã hủy”. Cập nhật lại tồn kho (+1) cho sản phẩm của shop đó.
+## 5. Yêu cầu phi chức năng
 
-# 4. Yêu cầu phi chức năng (Non-Functional Requirements - NFR)
+### 5.1. Hiệu năng và trải nghiệm
 
-## 4.1. Về hiệu năng & Trải nghiệm (Performance)
+- Trong điều kiện Wi-Fi/4G ổn định, thời gian tải màn hình và trả kết quả tìm kiếm mục tiêu không quá 2 giây.
+- Danh sách sản phẩm cuộn mượt, mục tiêu 60 FPS trên thiết bị di động cấu hình tiêu chuẩn dùng để kiểm thử đồ án.
+- Các nút gửi yêu cầu hiển thị trạng thái đang xử lý và không cho thao tác lặp trong thời gian chờ.
 
-- Tốc độ tải màn hình và phản hồi tìm kiếm dưới 1-2 giây.
-- Cải thiện và tối ưu tính năng vuốt cuộn màn hình đạt chuẩn 60 FPS mượt mà.
+### 5.2. Bảo mật
 
-## 4.2. Về bảo mật dữ liệu (Security)
+- Mật khẩu phải được băm một chiều bằng BCrypt hoặc Argon2; không lưu mật khẩu dạng bản rõ.
+- Access Token và Refresh Token được lưu bằng Flutter Secure Storage, sử dụng Android Keystore trên Android và iOS Keychain trên iOS.
+- Khi đăng xuất, xóa token và dữ liệu phiên khỏi thiết bị.
+- Chỉ sử dụng dữ liệu và ví giả lập; không thu thập thông tin thẻ hoặc xử lý thanh toán tiền thật.
 
-- Thông tin dữ liệu của khách hàng sẽ được bảo mật nghiêm ngặt, mọi thông tin quan trọng đều được mã hóa và lưu trong Secure Storage/ Keystore/ Keychain trên máy.
-- Khi người dùng đăng xuất mọi dữ liệu cá nhân và token trên máy đều được xóa sạch.
+### 5.3. Ngoại tuyến và bộ nhớ đệm
 
-## 4.3. Về khả năng dùng ngoại tuyến (Offline-first & Caching)
+- Khi mất Internet, người dùng vẫn có thể xem danh sách, chi tiết sản phẩm và giỏ hàng đã được tải trước đó từ bộ nhớ đệm.
+- Các thao tác cần đồng bộ như đăng ký, đăng nhập, đặt hàng, thanh toán và thay đổi số lượng giỏ hàng bị chặn khi ngoại tuyến; hiển thị “Bạn đang ngoại tuyến. Vui lòng kiểm tra lại kết nối mạng”.
+- Khi kết nối chưa ổn định sau thao tác đặt hàng hoặc thanh toán, ứng dụng phải cho phép kiểm tra trạng thái trước khi gửi lại để tránh tạo đơn hoặc thanh toán trùng.
 
-- Mọi trang hiển thị sản phẩm đều sẽ bị làm mờ và hiển thị dòng chữ “Mất kết nối mạng. Hãy kiểm tra lại kết nối.” kèm nút “Thử lại”. Mọi tính năng như cuộn trang, tìm kiếm, Đăng xuất khi thao tác sẽ hiển thị nút xoay tròn sau đó hiển thị dòng chữ “Mất kết nối mạng” kèm nút “Thử lại”.
-- Dữ liệu giỏ hàng đã được đặt vẫn được lưu lại, khi kết nối lại thành công thì sẽ hiển thị đầy đủ.
+## 6. Thuật ngữ
+
+| Thuật ngữ | Ý nghĩa |
+| --- | --- |
+| COD | Thanh toán khi nhận hàng. |
+| Ví giả lập (Mock Wallet) | Phương thức thanh toán mô phỏng, không dùng tiền thật. |
+| Idempotency Token | Mã duy nhất giúp yêu cầu gửi lại không tạo thêm đơn hoặc thanh toán trùng. |
+| Tồn kho tạm giữ (Reserved Stock) | Số lượng đã dành cho đơn hàng nhưng chưa bàn giao vận chuyển. |
+| Tồn kho khả dụng (Available Stock) | Số lượng khách có thể đặt sau khi trừ lượng đang tạm giữ. |
